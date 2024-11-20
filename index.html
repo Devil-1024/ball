@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Gamedev Phaser Workshop - lesson 16: Randomizing gameplay</title>
+    <title>弹球游戏</title>
     <style>* { padding: 0; margin: 0; }</style>
-    <script src="./phaser.min.js"></script>
+    <script src="phaser.min.js"></script>
 </head>
 <body>
 <script>
@@ -28,10 +28,10 @@ function preload() {
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.stage.backgroundColor = '#eee';
-    game.load.image('paddle', './img/paddle.png');
-    game.load.image('brick', './img/brick.png');
-    game.load.spritesheet('ball', './img/wobble.png', 20, 20);
-    game.load.spritesheet('button', './img/button.png', 120, 40);
+    game.load.image('paddle', 'img/paddle.png');
+    game.load.image('brick', 'img/brick.png');
+    game.load.spritesheet('ball', 'img/wobble.png', 20, 20);
+    game.load.spritesheet('button', 'img/button.png', 120, 40);
 }
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -104,7 +104,7 @@ function ballHitBrick(ball, brick) {
         brick.kill();
     }, this);
     killTween.start();
-    score += 10;
+    score += 1;
     scoreText.setText('Points: '+score);
     if(score === brickInfo.count.row*brickInfo.count.col*10) {
         alert('You won the game, congratulations!');
@@ -120,7 +120,7 @@ function ballLeaveScreen() {
         paddle.reset(game.world.width*0.5, game.world.height-5);
         game.input.onDown.addOnce(function(){
             lifeLostText.visible = false;
-            ball.body.velocity.set(150, -150);
+            ball.body.velocity.set(300, -300);
         }, this);
     }
     else {
@@ -134,7 +134,7 @@ function ballHitPaddle(ball, paddle) {
 }
 function startGame() {
     startButton.destroy();
-    ball.body.velocity.set(150, -150);
+    ball.body.velocity.set(300, -300);
     playing = true;
 }
 </script>
